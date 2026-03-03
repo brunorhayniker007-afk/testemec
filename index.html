@@ -19,15 +19,13 @@ html, body {
     overflow-x: hidden;
 }
 
-/* ===== VIDEO FUNDO CENTRALIZADO ===== */
+/* ===== VIDEO FUNDO FIXO CENTRALIZADO ===== */
 #bg-video {
     position: fixed;
     top: 50%;
     left: 50%;
     min-width: 100%;
     min-height: 100%;
-    width: auto;
-    height: auto;
     transform: translate(-50%, -50%);
     object-fit: cover;
     z-index: -3;
@@ -36,21 +34,15 @@ html, body {
 /* ===== OVERLAY ===== */
 .overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: rgba(0,0,0,0.65);
+    inset: 0;
+    background: rgba(0,0,0,0.70);
     z-index: -2;
 }
 
 /* ===== PARTICULAS ===== */
 #particles-js {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
+    inset: 0;
     z-index: -1;
 }
 
@@ -60,7 +52,7 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px 15px;
+    padding: 40px 15px;
 }
 
 .container {
@@ -84,7 +76,7 @@ html, body {
 }
 
 .logo img {
-    width: 110px;
+    width: 120px;
     transition: 0.3s;
 }
 
@@ -289,7 +281,7 @@ document.getElementById("resultado").innerText =
 <script>
 particlesJS("particles-js", {
   particles: {
-    number: { value: 70 },
+    number: { value: 80 },
     color: { value: "#00ff88" },
     shape: { type: "circle" },
     opacity: { value: 0.4 },
