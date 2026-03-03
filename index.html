@@ -14,20 +14,74 @@
 }
 
 body {
-    background: #000;
+    background: url("logo.png") no-repeat center center fixed;
+    background-size: cover;
     color: #fff;
     display: flex;
     justify-content: center;
     padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* camada escura */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.80);
+    backdrop-filter: blur(4px);
+    z-index: 0;
+}
+
+/* partículas */
+.particle {
+    position: fixed;
+    width: 4px;
+    height: 4px;
+    background: #00ffcc;
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: float 10s linear infinite;
+    z-index: 0;
+}
+
+@keyframes float {
+    from {
+        transform: translateY(100vh) translateX(0);
+        opacity: 0;
+    }
+    20% { opacity: 1; }
+    to {
+        transform: translateY(-10vh) translateX(50px);
+        opacity: 0;
+    }
 }
 
 .container {
+    position: relative;
+    z-index: 1;
     width: 100%;
     max-width: 500px;
-    background: #111;
+    background: rgba(17, 17, 17, 0.95);
     border: 1px solid #fff;
-    border-radius: 10px;
-    padding: 20px;
+    border-radius: 15px;
+    padding: 25px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 25px rgba(0,255,200,0.2);
+}
+
+/* LOGO TOPO */
+.logo-topo {
+    display: block;
+    margin: 0 auto 15px auto;
+    width: 150px;
+    animation: pulse 3s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
 }
 
 h1 {
@@ -79,30 +133,47 @@ button {
     width: 100%;
     padding: 12px;
     margin-top: 20px;
-    background: #fff;
+    background: linear-gradient(90deg,#00ffcc,#00aaff);
     color: #000;
     border: none;
     font-weight: bold;
     cursor: pointer;
     border-radius: 5px;
+    transition: 0.3s;
 }
 
 button:hover {
-    background: #ccc;
+    transform: scale(1.03);
 }
 
 .resultado {
     margin-top: 20px;
-    padding: 10px;
-    border: 1px solid #fff;
+    padding: 12px;
+    border: 1px solid #00ffcc;
     text-align: center;
     font-weight: bold;
+    font-size: 18px;
 }
 </style>
 </head>
 <body>
 
+<!-- Partículas -->
+<script>
+for (let i = 0; i < 40; i++) {
+    let p = document.createElement("div");
+    p.classList.add("particle");
+    p.style.left = Math.random() * 100 + "vw";
+    p.style.animationDuration = (6 + Math.random() * 6) + "s";
+    p.style.animationDelay = Math.random() * 5 + "s";
+    document.body.appendChild(p);
+}
+</script>
+
 <div class="container">
+
+<img src="logo.png" class="logo-topo">
+
 <h1>Calculadora Oficial</h1>
 
 <h2>🔧 Serviços</h2>
@@ -152,15 +223,8 @@ button:hover {
 <h2>🤝 Parcerias</h2>
 
 <div class="parcerias">
-<label>
-<input type="radio" name="parceria" id="pgs">
- PGS (Pegasus)
-</label>
-
-<label>
-<input type="radio" name="parceria" id="gravata">
- Os Gravata
-</label>
+<label><input type="radio" name="parceria" id="pgs"> PGS (Pegasus)</label>
+<label><input type="radio" name="parceria" id="gravata"> Os Gravata</label>
 </div>
 
 <button onclick="calcular()">CALCULAR TOTAL</button>
@@ -177,11 +241,9 @@ function calcular() {
 let pgs = document.getElementById("pgs").checked;
 let gravata = document.getElementById("gravata").checked;
 
-// SERVIÇOS
 let reparo = (parseFloat(document.getElementById("reparo").value) || 0) * 2500;
 let trocaPneu = (parseFloat(document.getElementById("trocaPneu").value) || 0) * 2500;
 
-// TUNING
 let tuningBase = parseFloat(document.getElementById("tuningValor").value) || 0;
 let tuningPercent = 0.50;
 
@@ -190,16 +252,11 @@ if (gravata) tuningPercent = 0.35;
 
 let tuning = tuningBase * tuningPercent;
 
-// KIT REPARO
 let kitValor = 3500;
-
-if (pgs || gravata) {
-    kitValor = 2000;
-}
+if (pgs || gravata) kitValor = 2000;
 
 let kitReparo = (parseFloat(document.getElementById("kitReparo").value) || 0) * kitValor;
 
-// ITENS FIXOS
 let pneu = (parseFloat(document.getElementById("pneu").value) || 0) * 2000;
 let peCabra = (parseFloat(document.getElementById("peCabra").value) || 0) * 2500;
 let corda = (parseFloat(document.getElementById("corda").value) || 0) * 5000;
