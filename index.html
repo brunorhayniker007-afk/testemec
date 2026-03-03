@@ -13,45 +13,54 @@
     font-family: Arial, sans-serif;
 }
 
-body {
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 15px;
-    overflow-x: hidden;
+html, body {
+    height: 100%;
     background: #000;
+    overflow-x: hidden;
 }
 
-/* VIDEO FUNDO */
+/* ===== VIDEO FUNDO CENTRALIZADO ===== */
 #bg-video {
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 50%;
+    left: 50%;
     min-width: 100%;
     min-height: 100%;
     width: auto;
     height: auto;
+    transform: translate(-50%, -50%);
     object-fit: cover;
     z-index: -3;
 }
 
-/* OVERLAY ESCURO */
+/* ===== OVERLAY ===== */
 .overlay {
     position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     background: rgba(0,0,0,0.65);
     z-index: -2;
 }
 
-/* PARTICULAS */
+/* ===== PARTICULAS ===== */
 #particles-js {
     position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     z-index: -1;
+}
+
+/* ===== CENTRALIZA CONTAINER ===== */
+.wrapper {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 15px;
 }
 
 .container {
@@ -64,6 +73,7 @@ body {
     box-shadow: 0 0 30px rgba(0,255,136,0.5);
     backdrop-filter: blur(8px);
     animation: fadeIn 0.8s ease-in-out;
+    color: #fff;
 }
 
 /* LOGO */
@@ -75,7 +85,6 @@ body {
 
 .logo img {
     width: 110px;
-    opacity: 0.95;
     transition: 0.3s;
 }
 
@@ -156,14 +165,6 @@ button:hover {
     border-radius: 6px;
 }
 
-/* RESPONSIVO */
-@media (max-width: 480px) {
-    .container {
-        max-width: 95%;
-        padding: 18px;
-    }
-}
-
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -172,7 +173,7 @@ button:hover {
 </head>
 <body>
 
-<!-- VIDEO DE FUNDO -->
+<!-- VIDEO FUNDO -->
 <video autoplay muted loop playsinline id="bg-video">
     <source src="fundo.mp4" type="video/mp4">
 </video>
@@ -180,6 +181,7 @@ button:hover {
 <div class="overlay"></div>
 <div id="particles-js"></div>
 
+<div class="wrapper">
 <div class="container">
 
 <div class="logo">
@@ -246,6 +248,7 @@ Total: R$ 0
 </div>
 
 </div>
+</div>
 
 <script>
 function calcular() {
@@ -285,13 +288,13 @@ document.getElementById("resultado").innerText =
 
 <script>
 particlesJS("particles-js", {
-  "particles": {
-    "number": { "value": 70 },
-    "color": { "value": "#00ff88" },
-    "shape": { "type": "circle" },
-    "opacity": { "value": 0.4 },
-    "size": { "value": 3 },
-    "move": { "enable": true, "speed": 1 }
+  particles: {
+    number: { value: 70 },
+    color: { value: "#00ff88" },
+    shape: { type: "circle" },
+    opacity: { value: 0.4 },
+    size: { value: 3 },
+    move: { enable: true, speed: 1 }
   }
 });
 </script>
